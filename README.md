@@ -24,9 +24,9 @@
 
 | Member | GitHub |
 |--------|--------|
-| Huzaifa | [@your-github-username](https://github.com/huzaifa206) |
-| Irteza  | [@irteza-github-username](https://github.com/irteza-github-username) |
-| Faizan  | [@faizan-github-username](https://github.com/faizan-github-username) |
+| Huzaifa | [@huzaifa](https://github.com/huzaifa206) |
+| Irteza  | [@irteza](https://github.com/mirteza1010-blip) |
+| Faizan  | [@faizan](https://github.com/faizan-github-username) |
 
 ---
 
