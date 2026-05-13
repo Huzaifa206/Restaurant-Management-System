@@ -1,8 +1,6 @@
 CREATE DATABASE RestaurantDatabase;
 USE RestaurantDatabase;
 
-
--- 1. Branches Table
 CREATE TABLE branches (
     branch_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_name NVARCHAR(100) NOT NULL,
@@ -14,7 +12,6 @@ CREATE TABLE branches (
     created_at DATETIME DEFAULT GETDATE()
 );
 
--- 2. Staff / Users Table
 CREATE TABLE staff (
     staff_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_id INT FOREIGN KEY REFERENCES branches(branch_id),
@@ -28,7 +25,6 @@ CREATE TABLE staff (
     is_active BIT DEFAULT 1
 );
 
--- 3. Customers Table
 CREATE TABLE customers (
     customer_id INT IDENTITY(1,1) PRIMARY KEY,
     full_name NVARCHAR(100),
@@ -38,14 +34,12 @@ CREATE TABLE customers (
     created_at DATETIME DEFAULT GETDATE()
 );
 
--- 4. Categories Table
 CREATE TABLE categories (
     category_id INT IDENTITY(1,1) PRIMARY KEY,
     category_name NVARCHAR(100) NOT NULL,
     description NVARCHAR(255)
 );
 
--- 5. Menu Items Table
 CREATE TABLE menu_items (
     item_id INT IDENTITY(1,1) PRIMARY KEY,
     category_id INT FOREIGN KEY REFERENCES categories(category_id),
@@ -55,7 +49,6 @@ CREATE TABLE menu_items (
     is_available BIT DEFAULT 1
 );
 
--- 6. Tables (Restaurant Tables)
 CREATE TABLE restaurant_tables (
     table_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_id INT FOREIGN KEY REFERENCES branches(branch_id),
@@ -64,7 +57,6 @@ CREATE TABLE restaurant_tables (
     status NVARCHAR(20) DEFAULT 'Available'  -- Available, Occupied, Reserved
 );
 
--- 7. Reservations
 CREATE TABLE reservations (
     reservation_id INT IDENTITY(1,1) PRIMARY KEY,
     table_id INT FOREIGN KEY REFERENCES restaurant_tables(table_id),
@@ -75,7 +67,6 @@ CREATE TABLE reservations (
     notes NVARCHAR(255)
 );
 
--- 8. Orders Table
 CREATE TABLE orders (
     order_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_id INT FOREIGN KEY REFERENCES branches(branch_id),
@@ -83,7 +74,7 @@ CREATE TABLE orders (
     customer_id INT FOREIGN KEY REFERENCES customers(customer_id),
     staff_id INT FOREIGN KEY REFERENCES staff(staff_id),
     order_type NVARCHAR(20) DEFAULT 'Dine-in',  -- Dine-in, Takeaway, Online
-    status NVARCHAR(30) DEFAULT 'Pending',       -- Pending, In-Kitchen, Ready, Served, Cancelled
+    status NVARCHAR(30) DEFAULT 'Pending',       -- Pending, In Progress, Completed, Cancelled
     order_time DATETIME DEFAULT GETDATE(),
     total_amount DECIMAL(10,2) DEFAULT 0
 );
@@ -95,10 +86,9 @@ CREATE TABLE order_details (
     item_id INT FOREIGN KEY REFERENCES menu_items(item_id),
     quantity INT NOT NULL,
     unit_price DECIMAL(10,2) NOT NULL,
-    subtotal AS (quantity * unit_price)  -- Computed Column
+    subtotal AS (quantity * unit_price)  
 );
 
--- 10. Suppliers
 CREATE TABLE suppliers (
     supplier_id INT IDENTITY(1,1) PRIMARY KEY,
     supplier_name NVARCHAR(100) NOT NULL,
@@ -109,18 +99,16 @@ CREATE TABLE suppliers (
     is_active BIT DEFAULT 1
 );
 
--- 11. Inventory
 CREATE TABLE inventory (
     inventory_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_id INT FOREIGN KEY REFERENCES branches(branch_id),
     item_name NVARCHAR(100) NOT NULL,
-    unit NVARCHAR(20),           -- kg, liters, pieces
+    unit NVARCHAR(20),         
     quantity_in_stock DECIMAL(10,2) DEFAULT 0,
     reorder_level DECIMAL(10,2) DEFAULT 10,   -- Alert threshold
     last_updated DATETIME DEFAULT GETDATE()
 );
 
--- 12. Purchases (from suppliers)
 CREATE TABLE purchases (
     purchase_id INT IDENTITY(1,1) PRIMARY KEY,
     supplier_id INT FOREIGN KEY REFERENCES suppliers(supplier_id),
@@ -132,7 +120,6 @@ CREATE TABLE purchases (
     status NVARCHAR(20) DEFAULT 'Ordered'    -- Ordered, Delivered
 );
 
--- 13. Payments
 CREATE TABLE payments (
     payment_id INT IDENTITY(1,1) PRIMARY KEY,
     order_id INT FOREIGN KEY REFERENCES orders(order_id),
@@ -141,7 +128,6 @@ CREATE TABLE payments (
     payment_time DATETIME DEFAULT GETDATE()
 );
 
--- 14. Invoices
 CREATE TABLE invoices (
     invoice_id INT IDENTITY(1,1) PRIMARY KEY,
     order_id INT FOREIGN KEY REFERENCES orders(order_id),
@@ -153,19 +139,15 @@ CREATE TABLE invoices (
     generated_at DATETIME DEFAULT GETDATE()
 );
 
--- 15. Attendance
 CREATE TABLE attendance (
     attendance_id INT IDENTITY(1,1) PRIMARY KEY,
     staff_id INT FOREIGN KEY REFERENCES staff(staff_id),
     check_in DATETIME,
     check_out DATETIME,
     date DATE DEFAULT CAST(GETDATE() AS DATE),
-    status NVARCHAR(20) DEFAULT 'Present'    -- Present, Absent, Late
+    status NVARCHAR(20) DEFAULT 'Present'  
 );
 
--- =====================
--- SEED DATA (Sample)
--- =====================
 
 INSERT INTO branches (branch_name, city, country, phone, address)
 VALUES ('Main Branch', 'Karachi', 'Pakistan', '021-1234567', 'Clifton, Karachi');

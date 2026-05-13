@@ -318,14 +318,14 @@ class CustomerPanel(QWidget):
 
     def apply_styles(self):
         self.setStyleSheet("""
-            QWidget { background: #f5f5f5; font-family: Arial; font-size: 13px; }
-            QFrame#topbar { background: #c0392b; }
+            QWidget { background: ##ff8b80; font-family: Arial; font-size: 13px; }
+            QFrame#topbar { background: #ff8b80; }
             QTabWidget::pane { border: none; background: #f5f5f5; }
             QTabBar::tab {
                 background: #ddd; padding: 10px 20px; font-size: 13px;
                 border-top-left-radius: 6px; border-top-right-radius: 6px;
             }
-            QTabBar::tab:selected { background: #c0392b; color: white; font-weight: bold; }
+            QTabBar::tab:selected { background: ##ff8b80; color: white; font-weight: bold; }
             QTableWidget { background: white; border: 1px solid #ddd; border-radius: 6px; }
             QHeaderView::section { background: #1a1a2e; color: white; padding: 6px; }
             QPushButton {

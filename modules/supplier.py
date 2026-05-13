@@ -210,7 +210,7 @@ class SupplierPanel(QWidget):
 
     def apply_styles(self):
         self.setStyleSheet("""
-            QWidget { background: #f5f5f5; font-family: Arial; font-size: 13px; }
+            QWidget { background: #2c3e50; font-family: Arial; font-size: 13px; }
             QFrame#topbar { background: #2c3e50; }
             QTabWidget::pane { border: none; }
             QTabBar::tab {
