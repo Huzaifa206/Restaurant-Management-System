@@ -26,7 +26,7 @@
 |--------|--------|
 | Huzaifa | [@huzaifa](https://github.com/huzaifa206) |
 | Irteza  | [@irteza](https://github.com/mirteza1010-blip) |
-| Faizan  | [@faizan](https://github.com/faizan-github-username) |
+| Faizan  | [@faizan](https://github.com/Faizyx100) |
 
 ---
 
