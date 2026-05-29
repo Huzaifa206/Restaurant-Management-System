@@ -79,7 +79,6 @@ CREATE TABLE orders (
     total_amount DECIMAL(10,2) DEFAULT 0
 );
 
--- 9. Order Details
 CREATE TABLE order_details (
     detail_id INT IDENTITY(1,1) PRIMARY KEY,
     order_id INT FOREIGN KEY REFERENCES orders(order_id),
@@ -159,7 +158,7 @@ VALUES
 (1, 'Admin User', 'Admin', 'admin', 'admin123', 100000),
 (1, 'Branch Manager', 'Manager', 'manager', 'manager123', 60000),
 (1, 'Head Chef', 'Chef', 'chef', 'chef123', 45000),
-(1, 'Waiter Ali', 'Waiter', 'waiter', 'waiter123', 25000),
+(1, 'Waiter', 'Waiter', 'waiter', 'waiter123', 25000),
 (1, 'Walk-in Customer', 'Customer', 'customer', 'customer123', 0),
 (1, 'Main Supplier', 'Supplier', 'supplier', 'supplier123', 0);
 
@@ -175,3 +174,4 @@ INSERT INTO menu_items (category_id, item_name, price) VALUES
 INSERT INTO restaurant_tables (branch_id, table_number, capacity) VALUES
 (1, 1, 4), (1, 2, 4), (1, 3, 6), (1, 4, 2), (1, 5, 8);
 
+select 
